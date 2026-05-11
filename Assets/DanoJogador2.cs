@@ -7,12 +7,12 @@ public class DanoJogador2 : MonoBehaviour
     public LayerMask inimigos;
 
     private Animator animacao;
-    private ControlaJogador jogador;
+    private ControlaJogador2 jogador; 
 
     void Start()
     {
         animacao = GetComponentInChildren<Animator>();
-        jogador = GetComponent<ControlaJogador>();
+        jogador = GetComponent<ControlaJogador2>(); 
     }
 
     void Update()
@@ -25,8 +25,6 @@ public class DanoJogador2 : MonoBehaviour
 
     void Atacar()
     {
-        Debug.Log("Ataque feito");
-
         if (jogador != null)
         {
             jogador.aAtacar = true;
@@ -36,27 +34,17 @@ public class DanoJogador2 : MonoBehaviour
             else
                 animacao.Play("abelhaataqueesq");
 
-            Invoke(nameof(PararAtaque), 0.5f); // ajusta ao tempo da animação
+            Invoke(nameof(PararAtaque), 0.5f);
         }
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, alcanceAtaque, inimigos);
-
         foreach (Collider2D inimigo in hits)
         {
-            Debug.Log("Atingi: " + inimigo.name);
-
             var vidaTerrestre = inimigo.GetComponent<Vidainimigoterrestre>();
-            if (vidaTerrestre != null)
-            {
-                vidaTerrestre.Receberdano(1);
-                continue;
-            }
+            if (vidaTerrestre != null) { vidaTerrestre.Receberdano(1); continue; }
 
             var vidaVoador = inimigo.GetComponent<Vidainimigovoador>();
-            if (vidaVoador != null)
-            {
-                vidaVoador.Receberdano(1);
-            }
+            if (vidaVoador != null) { vidaVoador.Receberdano(1); }
         }
     }
 
@@ -66,4 +54,3 @@ public class DanoJogador2 : MonoBehaviour
             jogador.aAtacar = false;
     }
 }
-

@@ -6,29 +6,44 @@ public class Vidajogador2 : MonoBehaviour
     public int vidaMaxima = 10;
 
     private Animator animacao;
-    private ControlaJogador jogador;
+    private ControlaJogador2 jogador;
 
     void Start()
     {
         vida = vidaMaxima;
-
         animacao = GetComponentInChildren<Animator>();
-        jogador = GetComponent<ControlaJogador>();
+        jogador = GetComponent<ControlaJogador2>();
     }
 
     public void Receberdano(int monte)
     {
-        vida -= monte;
+        Receberdano(monte, null);
+    }
 
+    public void Receberdano(int monte, Transform atacante)
+    {
+        vida -= monte;
 
         if (jogador != null)
         {
             jogador.aAtacar = true;
 
-            if (jogador.direcao == 1)
-                animacao.Play("Abelhadanoesq");
+            if (atacante != null)
+            {
+               
+                if (atacante.position.x < transform.position.x)
+                    animacao.Play("Abelhadanoesq");
+                else
+                    animacao.Play("Abelhadanodireita");
+            }
             else
-                animacao.Play("abelhadanodireita");
+            {
+                
+                if (jogador.direcao == -1) 
+                    animacao.Play("Abelhadanoesq");
+                else
+                    animacao.Play("Abelhadanodireita");
+            }
 
             Invoke(nameof(PararDano), 0.4f);
         }
