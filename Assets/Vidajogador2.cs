@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class Vidajogador2 : MonoBehaviour
@@ -7,6 +8,7 @@ public class Vidajogador2 : MonoBehaviour
 
     private Animator animacao;
     private ControlaJogador2 jogador;
+    private bool estaMorto = false;
 
     void Start()
     {
@@ -15,22 +17,30 @@ public class Vidajogador2 : MonoBehaviour
         jogador = GetComponent<ControlaJogador2>();
     }
 
+ 
     public void Receberdano(int monte)
     {
         Receberdano(monte, null);
     }
 
+
     public void Receberdano(int monte, Transform atacante)
     {
+        if (estaMorto) return;
+
         vida -= monte;
 
-        if (jogador != null)
+        if (vida <= 0)
+        {
+            Morrer(atacante);
+        }
+        else if (jogador != null)
         {
             jogador.aAtacar = true;
 
+       
             if (atacante != null)
             {
-               
                 if (atacante.position.x < transform.position.x)
                     animacao.Play("Abelhadanoesq");
                 else
@@ -38,8 +48,7 @@ public class Vidajogador2 : MonoBehaviour
             }
             else
             {
-                
-                if (jogador.direcao == -1) 
+                if (jogador.direcao == -1)
                     animacao.Play("Abelhadanoesq");
                 else
                     animacao.Play("Abelhadanodireita");
@@ -47,16 +56,45 @@ public class Vidajogador2 : MonoBehaviour
 
             Invoke(nameof(PararDano), 0.4f);
         }
+    }
 
-        if (vida <= 0)
+    void Morrer(Transform atacante)
+    {
+        estaMorto = true;
+
+        if (jogador != null)
         {
-            Destroy(gameObject);
+            jogador.aAtacar = true;
+
+            if (TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+            {
+                rb.linearVelocity = Vector2.zero;
+                rb.bodyType = RigidbodyType2D.Static;
+            }
         }
+
+      
+        if (atacante != null)
+        {
+            if (atacante.position.x > transform.position.x)
+                animacao.Play("Abelhamortadireita"); 
+            else
+                animacao.Play("Abelhamortaesquerda"); 
+        }
+        else
+        {
+            if (jogador.direcao == 1)
+                animacao.Play("Abelhamortadireita");
+            else
+                animacao.Play("Abelhamortaesquerda");
+        }
+
+        Destroy(gameObject, 1.0f);
     }
 
     void PararDano()
     {
-        if (jogador != null)
+        if (jogador != null && !estaMorto)
             jogador.aAtacar = false;
     }
 }

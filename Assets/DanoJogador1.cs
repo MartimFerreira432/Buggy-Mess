@@ -36,7 +36,7 @@ public class DanoJogador1 : MonoBehaviour
             else
                 animacao.Play("Vacaataqueesquerda");
 
-            Invoke(nameof(PararAtaque), 0.5f); // ajusta ao tempo da animação
+            Invoke(nameof(PararAtaque), 0.5f); 
         }
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, alcanceAtaque, inimigos);

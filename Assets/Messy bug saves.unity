@@ -4131,6 +4131,7 @@ MonoBehaviour:
   jogador2: {fileID: 317223566}
   speed: 2
   alcanceAtaque: 3
+  alvoAtual: {fileID: 0}
 --- !u!1 &5056222518260728510
 GameObject:
   m_ObjectHideFlags: 0
@@ -4147,7 +4148,7 @@ GameObject:
   - component: {fileID: 5547849759164924221}
   m_Layer: 0
   m_Name: InimigoTerrestre
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
