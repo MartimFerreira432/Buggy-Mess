@@ -1,6 +1,7 @@
 using UnityEngine;
-using System.Collections.Generic;
 using UnityEngine.InputSystem;
+
+
 
 
 public class ControlaJogador2 : MonoBehaviour
@@ -13,11 +14,10 @@ public class ControlaJogador2 : MonoBehaviour
     private Animator animacao;
 
     public int direcao = 1;
-
     public bool aAtacar = false;
 
-
     public Collectiblemanager cm;
+
     void Start()
     {
         RB = GetComponent<Rigidbody2D>();
@@ -29,12 +29,12 @@ public class ControlaJogador2 : MonoBehaviour
 
     void FixedUpdate()
     {
+        // CÂMARA (Restaurado)
         float DifCam = Cam.transform.position.x - transform.position.x;
 
         if (RB.linearVelocity.x > 0.5f && DifCam < 3)
         {
             Cam.transform.Translate(12 * Time.fixedDeltaTime, 0, 0);
-
             if (DifCam > 2.7f)
             {
                 Vector3 C = Cam.transform.position;
@@ -46,7 +46,6 @@ public class ControlaJogador2 : MonoBehaviour
         if (RB.linearVelocity.x < -0.5f && DifCam > -3)
         {
             Cam.transform.Translate(-12 * Time.fixedDeltaTime, 0, 0);
-
             if (DifCam < -2.7f)
             {
                 Vector3 C = Cam.transform.position;
@@ -62,14 +61,15 @@ public class ControlaJogador2 : MonoBehaviour
 
     void Update()
     {
-
         if (aAtacar) return;
 
+        // Deslizar na parede (Original)
         if (naParede && RB.linearVelocity.y < 0)
         {
             RB.linearVelocity = new Vector2(RB.linearVelocity.x, -2f);
         }
 
+        // SALTO (W)
         if (Keyboard.current.wKey.wasPressedThisFrame)
         {
             if (naParede)
@@ -86,11 +86,13 @@ public class ControlaJogador2 : MonoBehaviour
             }
         }
 
+        // DESCIDA RÁPIDA (S) - Tinha faltado na última versão!
         if (Keyboard.current.sKey.wasPressedThisFrame)
         {
             RB.AddForce(new Vector2(0, -900f));
         }
 
+        // MOVIMENTO (A e D)
         if (Keyboard.current.aKey.IsPressed())
         {
             RB.AddForce(new Vector2(-8000 * Time.deltaTime, 0));
@@ -103,65 +105,58 @@ public class ControlaJogador2 : MonoBehaviour
             direcao = 1;
         }
 
-        if (RB.linearVelocity.x > 4)
-            RB.linearVelocity = new Vector2(4, RB.linearVelocity.y);
+        // LIMITADORES DE VELOCIDADE
+        if (RB.linearVelocity.x > 4) RB.linearVelocity = new Vector2(4, RB.linearVelocity.y);
+        if (RB.linearVelocity.x < -4) RB.linearVelocity = new Vector2(-4, RB.linearVelocity.y);
 
-        if (RB.linearVelocity.x < -4)
-            RB.linearVelocity = new Vector2(-4, RB.linearVelocity.y);
-
+        // ANIMAÇÕES E SOM GLOBAL
         float vel = Mathf.Abs(RB.linearVelocity.x);
 
         if (salto < 2)
         {
-            if (direcao == 1)
-                PlayAnim("abelhasaltadirei");
-            else
-                PlayAnim("abelhasaltaesq");
+            AudioManager.Instance.TocarPassos(false);
+            if (direcao == 1) PlayAnim("abelhasaltadirei");
+            else PlayAnim("abelhasaltaesq");
         }
         else if (vel > 0.1f)
         {
-            if (direcao == 1)
-                PlayAnim("abelhacaminhadirei");
-            else
-                PlayAnim("Abelhacaminhaesq");
+            if (direcao == 1) PlayAnim("abelhacaminhadirei");
+            else PlayAnim("Abelhacaminhaesq");
+            AudioManager.Instance.TocarPassos(true);
         }
         else
         {
-            if (direcao == 1)
-                PlayAnim("abelhaidledireita");
-            else
-                PlayAnim("Abelhaidle");
+            AudioManager.Instance.TocarPassos(false);
+            if (direcao == 1) PlayAnim("abelhaidledireita");
+            else PlayAnim("Abelhaidle");
         }
     }
 
     void PlayAnim(string nome)
     {
-        if (!animacao.GetCurrentAnimatorStateInfo(0).IsName(nome))
-        {
-            animacao.Play(nome);
-        }
+        if (!animacao.GetCurrentAnimatorStateInfo(0).IsName(nome)) animacao.Play(nome);
     }
 
+    // COLISÕES
     void OnCollisionEnter2D(Collision2D col)
     {
         salto = 2;
         Normalparede = col.contacts[0].normal;
-
-        if (Mathf.Abs(Normalparede.x) > 0.5f)
-            naParede = true;
+        if (Mathf.Abs(Normalparede.x) > 0.5f) naParede = true;
     }
 
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        naParede = false;
-    }
+    void OnCollisionExit2D(Collision2D collision) { naParede = false; }
 
+    // COLETA (Tag Collectibles)
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Collectibles"))
         {
-            cm.collectiblecount++;
-            Destroy(collision.gameObject);
+            if (cm != null)
+            {
+                cm.collectiblecount++;
+                Destroy(collision.gameObject);
+            }
         }
     }
 }
