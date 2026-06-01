@@ -59,7 +59,7 @@ public class ControlaJogador : MonoBehaviour
         if (naParede && RB.linearVelocity.y < 0)
             RB.linearVelocity = new Vector2(RB.linearVelocity.x, -2f);
 
-        // SALTO (W)
+      
         if (Keyboard.current.wKey.wasPressedThisFrame)
         {
             if (naParede)
@@ -76,13 +76,12 @@ public class ControlaJogador : MonoBehaviour
             }
         }
 
-        // DESCIDA RÁPIDA (S) - Reintroduzido aqui também!
+      
         if (Keyboard.current.sKey.wasPressedThisFrame)
         {
             RB.AddForce(new Vector2(0, -700f));
         }
 
-        // MOVIMENTO (A e D)
         if (Keyboard.current.aKey.IsPressed())
         {
             RB.AddForce(new Vector2(-8000 * Time.deltaTime, 0));
