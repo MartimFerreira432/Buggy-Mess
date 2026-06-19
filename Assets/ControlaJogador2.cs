@@ -1,9 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-
-
 public class ControlaJogador2 : MonoBehaviour
 {
     private Rigidbody2D RB;
@@ -27,9 +24,18 @@ public class ControlaJogador2 : MonoBehaviour
         animacao = GetComponentInChildren<Animator>();
     }
 
+    void OnEnable()
+    {
+        if (RB == null) RB = GetComponent<Rigidbody2D>();
+        if (RB != null)
+        {
+            RB.linearVelocity = Vector2.zero;
+        }
+        direcao = 1;
+    }
+
     void FixedUpdate()
     {
-        // CÂMARA (Restaurado)
         float DifCam = Cam.transform.position.x - transform.position.x;
 
         if (RB.linearVelocity.x > 0.5f && DifCam < 3)
@@ -63,13 +69,11 @@ public class ControlaJogador2 : MonoBehaviour
     {
         if (aAtacar) return;
 
-        // Deslizar na parede (Original)
         if (naParede && RB.linearVelocity.y < 0)
         {
             RB.linearVelocity = new Vector2(RB.linearVelocity.x, -2f);
         }
 
-        // SALTO (W)
         if (Keyboard.current.wKey.wasPressedThisFrame)
         {
             if (naParede)
@@ -86,49 +90,53 @@ public class ControlaJogador2 : MonoBehaviour
             }
         }
 
-        // DESCIDA RÁPIDA (S) - Tinha faltado na última versão!
         if (Keyboard.current.sKey.wasPressedThisFrame)
         {
             RB.AddForce(new Vector2(0, -900f));
         }
 
-        // MOVIMENTO (A e D)
-        if (Keyboard.current.aKey.IsPressed())
+        bool carregandoEsquerda = Keyboard.current.aKey.IsPressed();
+        bool carregandoDireita = Keyboard.current.dKey.IsPressed();
+
+        if (carregandoEsquerda)
         {
             RB.AddForce(new Vector2(-8000 * Time.deltaTime, 0));
             direcao = -1;
         }
-
-        if (Keyboard.current.dKey.IsPressed())
+        else if (carregandoDireita)
         {
             RB.AddForce(new Vector2(8000 * Time.deltaTime, 0));
             direcao = 1;
         }
+        else
+        {
+         
+            RB.linearVelocity = new Vector2(0, RB.linearVelocity.y);
+        }
 
-        // LIMITADORES DE VELOCIDADE
         if (RB.linearVelocity.x > 4) RB.linearVelocity = new Vector2(4, RB.linearVelocity.y);
         if (RB.linearVelocity.x < -4) RB.linearVelocity = new Vector2(-4, RB.linearVelocity.y);
 
-        // ANIMAÇÕES E SOM GLOBAL
         float vel = Mathf.Abs(RB.linearVelocity.x);
+
+      
+        if (direcao == 1) transform.localScale = new Vector3(1, 1, 1);
+        else if (direcao == -1) transform.localScale = new Vector3(-1, 1, 1);
 
         if (salto < 2)
         {
             AudioManager.Instance.TocarPassos(false);
-            if (direcao == 1) PlayAnim("abelhasaltadirei");
-            else PlayAnim("abelhasaltaesq");
+            PlayAnim("abelhasaltadirei");
         }
         else if (vel > 0.1f)
         {
-            if (direcao == 1) PlayAnim("abelhacaminhadirei");
-            else PlayAnim("Abelhacaminhaesq");
+            PlayAnim("abelhacaminhadirei");
             AudioManager.Instance.TocarPassos(true);
         }
         else
         {
             AudioManager.Instance.TocarPassos(false);
-            if (direcao == 1) PlayAnim("abelhaidledireita");
-            else PlayAnim("Abelhaidle");
+            PlayAnim("abelhaidledireita");
         }
     }
 
@@ -137,7 +145,6 @@ public class ControlaJogador2 : MonoBehaviour
         if (!animacao.GetCurrentAnimatorStateInfo(0).IsName(nome)) animacao.Play(nome);
     }
 
-    // COLISÕES
     void OnCollisionEnter2D(Collision2D col)
     {
         salto = 2;
@@ -147,7 +154,6 @@ public class ControlaJogador2 : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D collision) { naParede = false; }
 
-    // COLETA (Tag Collectibles)
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Collectibles"))

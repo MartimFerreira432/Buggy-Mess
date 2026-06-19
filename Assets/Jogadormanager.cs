@@ -9,22 +9,20 @@ public class Jogadormanager : MonoBehaviour
     public GameObject Jogador;
     public GameObject Jogador2;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Jogador.SetActive(true);
         Jogador2.SetActive(false);
-        
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Keyboard.current.qKey.wasPressedThisFrame)
-            {
+        {
             TrocarJogador();
         }
     }
+
     public void TrocarJogador()
     {
         if (jogadorativo)
@@ -37,7 +35,8 @@ public class Jogadormanager : MonoBehaviour
             Jogador2.SetActive(true);
             jogadorativo = false;
         }
-        else {
+        else
+        {
             Vector3 pos = Jogador2.transform.position;
             controlaJogador1.enabled = true;
             controlaJogador2.enabled = false;
@@ -45,7 +44,6 @@ public class Jogadormanager : MonoBehaviour
             Jogador.SetActive(true);
             Jogador2.SetActive(false);
             jogadorativo = true;
-         
         }
     }
 }
