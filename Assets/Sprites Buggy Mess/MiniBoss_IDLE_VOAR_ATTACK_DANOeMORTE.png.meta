@@ -1,0 +1,706 @@
+fileFormatVersion: 2
+guid: 4bc14dea6d7be2c41803d352b2991234
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2040752744985649073
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_0
+  - first:
+      213: 5505269885346890402
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_1
+  - first:
+      213: -7881201680749041528
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_2
+  - first:
+      213: -1681390707047976092
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_3
+  - first:
+      213: 4772273781588870864
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_4
+  - first:
+      213: 9049168498208471559
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_5
+  - first:
+      213: 4124703171618074771
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_6
+  - first:
+      213: 8487478484962212435
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_7
+  - first:
+      213: 4252301538577426751
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_8
+  - first:
+      213: -3841133620049000091
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_9
+  - first:
+      213: 6992075803447284822
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_10
+  - first:
+      213: 1023833963401876873
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_11
+  - first:
+      213: -5985898954576204194
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_12
+  - first:
+      213: -6026398849639006452
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_13
+  - first:
+      213: -5228549530668892076
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_14
+  - first:
+      213: -3659712947463007333
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_15
+  - first:
+      213: 353537718973785745
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_16
+  - first:
+      213: -7875339812959848773
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_17
+  - first:
+      213: -8779248389393082635
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_18
+  - first:
+      213: 2792287633007073106
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_19
+  - first:
+      213: 6865297729253563161
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_20
+  - first:
+      213: 3210309295358376950
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_21
+  - first:
+      213: 8317123424216689721
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_22
+  - first:
+      213: 622031643903374401
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_23
+  - first:
+      213: 5830885288109973012
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_24
+  - first:
+      213: -7096610927131148112
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_25
+  - first:
+      213: -7512892777384349522
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_26
+  - first:
+      213: 4987750919603622446
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_27
+  - first:
+      213: -1374560511115575833
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_28
+  - first:
+      213: 771596187482607961
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_29
+  - first:
+      213: 8979906034598784928
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_30
+  - first:
+      213: -4081270581082901007
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_31
+  - first:
+      213: 7087068592307633454
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_32
+  - first:
+      213: 6088511682126972988
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_33
+  - first:
+      213: -2190469069539558111
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_34
+  - first:
+      213: -7098323541370306248
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_35
+  - first:
+      213: 6291777138071686670
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_36
+  - first:
+      213: 6834118936450733672
+    second: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_37
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bfd5472fc5325c10800000000000000
+      internalID: 2040752744985649073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 768
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a2c1c4eac5a66c40800000000000000
+      internalID: 5505269885346890402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 768
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 888edb7e3d850a290800000000000000
+      internalID: -7881201680749041528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46333c17f008aa8e0800000000000000
+      internalID: -1681390707047976092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d6c38248b58a3240800000000000000
+      internalID: 4772273781588870864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_5
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70afe58fdca159d70800000000000000
+      internalID: 9049168498208471559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 390f8345ea3ed3930800000000000000
+      internalID: 4124703171618074771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_7
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35a71f6a6b499c570800000000000000
+      internalID: 8487478484962212435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3921cc38b5330b30800000000000000
+      internalID: 4252301538577426751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5694b22e25d81bac0800000000000000
+      internalID: -3841133620049000091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 654541bc5e7d80160800000000000000
+      internalID: 6992075803447284822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_11
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9859c81b093653e00800000000000000
+      internalID: 1023833963401876873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5e6a1f8d90ddeca0800000000000000
+      internalID: -5985898954576204194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_13
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0fb17cec2eed5ca0800000000000000
+      internalID: -6026398849639006452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_14
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45002f567e57077b0800000000000000
+      internalID: -5228549530668892076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b93d19ad676163dc0800000000000000
+      internalID: -3659712947463007333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_16
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 196622aaea408e400800000000000000
+      internalID: 353537718973785745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_17
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb6790b5a2c25b290800000000000000
+      internalID: -7875339812959848773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f61e43ba18d92680800000000000000
+      internalID: -8779248389393082635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_19
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2575a1cdec230c620800000000000000
+      internalID: 2792287633007073106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: adab06706c8a8054a862f0d38db9acf1
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":7.0},"gridSpriteSize":{"x":128.0,"y":128.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_0: 2040752744985649073
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_1: 5505269885346890402
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_10: 6992075803447284822
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_11: 1023833963401876873
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_12: -5985898954576204194
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_13: -6026398849639006452
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_14: -5228549530668892076
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_15: -3659712947463007333
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_16: 353537718973785745
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_17: -7875339812959848773
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_18: -8779248389393082635
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_19: 2792287633007073106
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_2: -7881201680749041528
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_3: -1681390707047976092
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_4: 4772273781588870864
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_5: 9049168498208471559
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_6: 4124703171618074771
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_7: 8487478484962212435
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_8: 4252301538577426751
+      MiniBoss_IDLE_VOAR_ATTACK_DANOeMORTE_9: -3841133620049000091
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
