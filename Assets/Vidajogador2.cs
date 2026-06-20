@@ -57,12 +57,25 @@ public class Vidajogador2 : MonoBehaviour
         }
 
         // Última combinação a testar: scale positivo + clip "direita"
-        Vector3 escala = transform.localScale;
+           Vector3 escala = transform.localScale;
         escala.x = Mathf.Abs(escala.x);
         transform.localScale = escala;
         animacao.Play("Abelhamortadireita");
 
-        Destroy(gameObject, 1.0f);
+        Invoke(nameof(AcionarRespawn), 1.0f);
+    }
+
+    void AcionarRespawn()
+    {
+        CheckpointManager.Instance.Respawn();
+    }
+
+    public void ResetVida()
+    {
+        vida = vidaMaxima;
+        estaMorto = false;
+        if (jogador != null) jogador.aAtacar = false;
+        if (animacao != null) animacao.speed = 1f;
     }
 
     void PararDano()
