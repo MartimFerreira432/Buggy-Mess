@@ -1,11 +1,9 @@
-
 using UnityEngine;
 
 public class Vidajogador2 : MonoBehaviour
 {
     public int vida;
     public int vidaMaxima = 10;
-
     private Animator animacao;
     private ControlaJogador2 jogador;
     private bool estaMorto = false;
@@ -17,12 +15,10 @@ public class Vidajogador2 : MonoBehaviour
         jogador = GetComponent<ControlaJogador2>();
     }
 
- 
     public void Receberdano(int monte)
     {
         Receberdano(monte, null);
     }
-
 
     public void Receberdano(int monte, Transform atacante)
     {
@@ -38,21 +34,9 @@ public class Vidajogador2 : MonoBehaviour
         {
             jogador.aAtacar = true;
 
-       
-            if (atacante != null)
-            {
-                if (atacante.position.x < transform.position.x)
-                    animacao.Play("Abelhadanoesq");
-                else
-                    animacao.Play("Abelhadanodireita");
-            }
-            else
-            {
-                if (jogador.direcao == -1)
-                    animacao.Play("Abelhadanoesq");
-                else
-                    animacao.Play("Abelhadanodireita");
-            }
+            // Usa sempre o mesmo clip; a direção é tratada pelo flip (transform.localScale)
+            // que já está definido por "direcao" e fica congelado durante o aAtacar
+            animacao.Play("Abelhadanodireita");
 
             Invoke(nameof(PararDano), 0.4f);
         }
@@ -65,7 +49,6 @@ public class Vidajogador2 : MonoBehaviour
         if (jogador != null)
         {
             jogador.aAtacar = true;
-
             if (TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
             {
                 rb.linearVelocity = Vector2.zero;
@@ -73,21 +56,11 @@ public class Vidajogador2 : MonoBehaviour
             }
         }
 
-      
-        if (atacante != null)
-        {
-            if (atacante.position.x > transform.position.x)
-                animacao.Play("Abelhamortadireita"); 
-            else
-                animacao.Play("Abelhamortaesquerda"); 
-        }
-        else
-        {
-            if (jogador.direcao == 1)
-                animacao.Play("Abelhamortadireita");
-            else
-                animacao.Play("Abelhamortaesquerda");
-        }
+        // Última combinação a testar: scale positivo + clip "direita"
+        Vector3 escala = transform.localScale;
+        escala.x = Mathf.Abs(escala.x);
+        transform.localScale = escala;
+        animacao.Play("Abelhamortadireita");
 
         Destroy(gameObject, 1.0f);
     }

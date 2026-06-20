@@ -36,6 +36,9 @@ public class ControlaJogador2 : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (Cam == null) Cam = Camera.main.gameObject;
+        if (Cam == null) return;
+
         float DifCam = Cam.transform.position.x - transform.position.x;
 
         if (RB.linearVelocity.x > 0.5f && DifCam < 3)
@@ -110,7 +113,6 @@ public class ControlaJogador2 : MonoBehaviour
         }
         else
         {
-         
             RB.linearVelocity = new Vector2(0, RB.linearVelocity.y);
         }
 
@@ -119,37 +121,40 @@ public class ControlaJogador2 : MonoBehaviour
 
         float vel = Mathf.Abs(RB.linearVelocity.x);
 
-      
         if (direcao == 1) transform.localScale = new Vector3(1, 1, 1);
         else if (direcao == -1) transform.localScale = new Vector3(-1, 1, 1);
 
+   
         if (salto < 2)
         {
-            AudioManager.Instance.TocarPassos(false);
+            if (AudioManager.Instance != null) AudioManager.Instance.TocarPassos(false);
             PlayAnim("abelhasaltadirei");
         }
         else if (vel > 0.1f)
         {
             PlayAnim("abelhacaminhadirei");
-            AudioManager.Instance.TocarPassos(true);
+            if (AudioManager.Instance != null) AudioManager.Instance.TocarPassos(true);
         }
         else
         {
-            AudioManager.Instance.TocarPassos(false);
+            if (AudioManager.Instance != null) AudioManager.Instance.TocarPassos(false);
             PlayAnim("abelhaidledireita");
         }
     }
 
     void PlayAnim(string nome)
     {
-        if (!animacao.GetCurrentAnimatorStateInfo(0).IsName(nome)) animacao.Play(nome);
+        if (animacao != null && !animacao.GetCurrentAnimatorStateInfo(0).IsName(nome)) animacao.Play(nome);
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
         salto = 2;
-        Normalparede = col.contacts[0].normal;
-        if (Mathf.Abs(Normalparede.x) > 0.5f) naParede = true;
+        if (col.contacts.Length > 0)
+        {
+            Normalparede = col.contacts[0].normal;
+            if (Mathf.Abs(Normalparede.x) > 0.5f) naParede = true;
+        }
     }
 
     void OnCollisionExit2D(Collision2D collision) { naParede = false; }

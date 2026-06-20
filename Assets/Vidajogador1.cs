@@ -4,7 +4,6 @@ public class Vidajogador1 : MonoBehaviour
 {
     public int vida;
     public int vidaMaxima = 10;
-
     private Animator animacao;
     private ControlaJogador jogador;
     private bool estaMorto = false;
@@ -35,21 +34,8 @@ public class Vidajogador1 : MonoBehaviour
         {
             jogador.aAtacar = true;
 
-            // DANO (Mantido igual ao teu código anterior)
-            if (atacante != null)
-            {
-                if (atacante.position.x > transform.position.x)
-                    animacao.Play("Vacadanoesq");
-                else
-                    animacao.Play("Vacadanodirei");
-            }
-            else
-            {
-                if (jogador.direcao == 1)
-                    animacao.Play("Vacadanoesq");
-                else
-                    animacao.Play("Vacadanodirei");
-            }
+            
+            animacao.Play("Vacadanoesq");
 
             Invoke(nameof(PararDano), 0.4f);
         }
@@ -62,7 +48,6 @@ public class Vidajogador1 : MonoBehaviour
         if (jogador != null)
         {
             jogador.aAtacar = true;
-
             if (TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
             {
                 rb.linearVelocity = Vector2.zero;
@@ -70,21 +55,11 @@ public class Vidajogador1 : MonoBehaviour
             }
         }
 
-        // MORTE (Invertida conforme pedido)
-        if (atacante != null)
-        {
-            if (atacante.position.x > transform.position.x)
-                animacao.Play("Vacamortadireita"); // Invertido aqui
-            else
-                animacao.Play("Vacamortaesquerda"); // Invertido aqui
-        }
+        
+        if (jogador != null && jogador.direcao == 1)
+            animacao.Play("Vacamortadireita");
         else
-        {
-            if (jogador.direcao == 1)
-                animacao.Play("Vacamortadireita"); // Invertido aqui
-            else
-                animacao.Play("Vacamortaesquerda"); // Invertido aqui
-        }
+            animacao.Play("Vacamortaesquerda");
 
         Destroy(gameObject, 1.0f);
     }

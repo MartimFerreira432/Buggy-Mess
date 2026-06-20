@@ -1,18 +1,18 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class DanoJogador2 : MonoBehaviour
 {
     public float alcanceAtaque = 2f;
     public LayerMask inimigos;
-
     private Animator animacao;
-    private ControlaJogador2 jogador; 
+    private ControlaJogador2 jogador;
 
     void Start()
     {
         animacao = GetComponentInChildren<Animator>();
-        jogador = GetComponent<ControlaJogador2>(); 
+        jogador = GetComponent<ControlaJogador2>();
     }
 
     void Update()
@@ -29,10 +29,9 @@ public class DanoJogador2 : MonoBehaviour
         {
             jogador.aAtacar = true;
 
-            if (jogador.direcao == 1)
-                animacao.Play("abelhaataquedirei");
-            else
-                animacao.Play("abelhaataqueesq");
+            // Usa sempre o mesmo clip; a direção é tratada pelo flip (transform.localScale)
+            // que já está definido por "direcao" e fica congelado durante o aAtacar
+            animacao.Play("abelhaataquedirei");
 
             Invoke(nameof(PararAtaque), 0.5f);
         }
@@ -42,7 +41,6 @@ public class DanoJogador2 : MonoBehaviour
         {
             var vidaTerrestre = inimigo.GetComponent<Vidainimigoterrestre>();
             if (vidaTerrestre != null) { vidaTerrestre.Receberdano(1); continue; }
-
             var vidaVoador = inimigo.GetComponent<Vidainimigovoador>();
             if (vidaVoador != null) { vidaVoador.Receberdano(1); }
         }

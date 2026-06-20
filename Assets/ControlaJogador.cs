@@ -36,6 +36,9 @@ public class ControlaJogador : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (Cam == null) Cam = Camera.main.gameObject;
+        if (Cam == null) return;
+
         float DifCam = Cam.transform.position.x - transform.position.x;
         if (RB.linearVelocity.x > 0.5f && DifCam < 3)
         {
@@ -64,6 +67,7 @@ public class ControlaJogador : MonoBehaviour
 
     void Update()
     {
+      
         if (aAtacar) return;
 
         if (naParede && RB.linearVelocity.y < 0)
@@ -105,7 +109,6 @@ public class ControlaJogador : MonoBehaviour
         }
         else
         {
-      
             RB.linearVelocity = new Vector2(0, RB.linearVelocity.y);
         }
 
@@ -118,33 +121,37 @@ public class ControlaJogador : MonoBehaviour
         if (direcao == 1) transform.localScale = new Vector3(1, 1, 1);
         else if (direcao == -1) transform.localScale = new Vector3(-1, 1, 1);
 
+   
         if (salto < 2)
         {
-            AudioManager.Instance.TocarPassos(false);
+            if (AudioManager.Instance != null) AudioManager.Instance.TocarPassos(false);
             PlayAnim("Vacasaltadirei");
         }
         else if (vel > 0.1f)
         {
             PlayAnim("Vacaandardireita");
-            AudioManager.Instance.TocarPassos(true);
+            if (AudioManager.Instance != null) AudioManager.Instance.TocarPassos(true);
         }
         else
         {
-            AudioManager.Instance.TocarPassos(false);
+            if (AudioManager.Instance != null) AudioManager.Instance.TocarPassos(false);
             PlayAnim("Vacanormaldireita");
         }
     }
 
     void PlayAnim(string nome)
     {
-        if (!animacao.GetCurrentAnimatorStateInfo(0).IsName(nome)) animacao.Play(nome);
+        if (animacao != null && !animacao.GetCurrentAnimatorStateInfo(0).IsName(nome)) animacao.Play(nome);
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
         salto = 2;
-        Normalparede = col.contacts[0].normal;
-        if (Mathf.Abs(Normalparede.x) > 0.5f) naParede = true;
+        if (col.contacts.Length > 0)
+        {
+            Normalparede = col.contacts[0].normal;
+            if (Mathf.Abs(Normalparede.x) > 0.5f) naParede = true;
+        }
     }
 
     void OnCollisionExit2D(Collision2D collision) { naParede = false; }

@@ -8,15 +8,18 @@ public class DanoJogador1 : MonoBehaviour
 
     private Animator animacao;
     private ControlaJogador jogador;
+    private Rigidbody2D rb;
 
     void Start()
     {
         animacao = GetComponentInChildren<Animator>();
         jogador = GetComponent<ControlaJogador>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
+     
         if (Keyboard.current.fKey.wasPressedThisFrame)
         {
             Atacar();
@@ -31,14 +34,22 @@ public class DanoJogador1 : MonoBehaviour
         {
             jogador.aAtacar = true;
 
-            if (jogador.direcao == 1)
+          
+            if (animacao != null)
+            {
                 animacao.Play("Vacaataquedireita");
-            else
-                animacao.Play("Vacaataqueesquerda");
+            }
 
-            Invoke(nameof(PararAtaque), 0.5f); 
+     
+            if (rb != null)
+            {
+                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            }
+
+            Invoke(nameof(PararAtaque), 0.5f);
         }
 
+  
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, alcanceAtaque, inimigos);
 
         foreach (Collider2D inimigo in hits)
@@ -63,6 +74,10 @@ public class DanoJogador1 : MonoBehaviour
     void PararAtaque()
     {
         if (jogador != null)
+        {
             jogador.aAtacar = false;
+        }
     }
+
+
 }
