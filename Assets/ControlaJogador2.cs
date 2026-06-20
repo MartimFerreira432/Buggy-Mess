@@ -32,6 +32,7 @@ public class ControlaJogador2 : MonoBehaviour
             RB.linearVelocity = Vector2.zero;
         }
         direcao = 1;
+        if (animacao != null) animacao.speed = 1f;
     }
 
     void FixedUpdate()
@@ -124,19 +125,27 @@ public class ControlaJogador2 : MonoBehaviour
         if (direcao == 1) transform.localScale = new Vector3(1, 1, 1);
         else if (direcao == -1) transform.localScale = new Vector3(-1, 1, 1);
 
-   
         if (salto < 2)
         {
+            // Está no ar (a subir ou a cair): mantém a pose de salto sem repetir a animação.
             if (AudioManager.Instance != null) AudioManager.Instance.TocarPassos(false);
             PlayAnim("abelhasaltadirei");
+
+            var info = animacao.GetCurrentAnimatorStateInfo(0);
+            if (info.IsName("abelhasaltadirei") && info.normalizedTime >= 1f)
+            {
+                animacao.speed = 0f; // congela no último frame até aterrar
+            }
         }
         else if (vel > 0.1f)
         {
+            animacao.speed = 1f;
             PlayAnim("abelhacaminhadirei");
             if (AudioManager.Instance != null) AudioManager.Instance.TocarPassos(true);
         }
         else
         {
+            animacao.speed = 1f;
             if (AudioManager.Instance != null) AudioManager.Instance.TocarPassos(false);
             PlayAnim("abelhaidledireita");
         }
@@ -149,10 +158,17 @@ public class ControlaJogador2 : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        salto = 2;
         if (col.contacts.Length > 0)
         {
             Normalparede = col.contacts[0].normal;
+
+            if (Normalparede.y > 0.5f)
+            {
+                // Aterrou no chão: liberta o salto e volta a animação ao normal.
+                salto = 2;
+                if (animacao != null) animacao.speed = 1f;
+            }
+
             if (Mathf.Abs(Normalparede.x) > 0.5f) naParede = true;
         }
     }

@@ -11,11 +11,7 @@ public class Jogadormanager : MonoBehaviour
 
     void Start()
     {
-     
-        int jogadorSalvo = PlayerPrefs.GetInt("JogadorAtivoSalvo", 1);
-
-        if (jogadorSalvo == 1) { DefinirJogador1(); }
-        else { DefinirJogador2(); }
+        DefinirJogador1();
     }
 
     void Update()
@@ -28,14 +24,24 @@ public class Jogadormanager : MonoBehaviour
         if (jogadorativo)
         {
             Vector3 pos = Jogador.transform.position;
+            int dir = controlaJogador1.direcao;
+
             Jogador2.transform.position = pos;
             DefinirJogador2();
+
+            controlaJogador2.direcao = dir;
+            Jogador2.transform.localScale = new Vector3(dir, 1, 1);
         }
         else
         {
             Vector3 pos = Jogador2.transform.position;
+            int dir = controlaJogador2.direcao;
+
             Jogador.transform.position = pos;
             DefinirJogador1();
+
+            controlaJogador1.direcao = dir;
+            Jogador.transform.localScale = new Vector3(dir, 1, 1);
         }
     }
 
