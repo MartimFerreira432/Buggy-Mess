@@ -1,10 +1,9 @@
 using UnityEngine;
 
-// Put this on the parent panel that contains borb, gaf, and Lib
-// (or any persistent object in the same Canvas).
+
 public class GaleriaColecionaveis : MonoBehaviour
 {
-    [Header("Drag the 3 items here, in display order")]
+
     public GameObject borb;
     public GameObject gaf;
     public GameObject lib;
@@ -22,7 +21,7 @@ public class GaleriaColecionaveis : MonoBehaviour
         MostrarAtual();
     }
 
-    // Hook this to the ">" button's OnClick
+
     public void Proximo()
     {
         Debug.Log("Proximo chamado, indice antes: " + indiceAtual);
@@ -31,7 +30,7 @@ public class GaleriaColecionaveis : MonoBehaviour
         Debug.Log("Proximo chamado, indice depois: " + indiceAtual);
     }
 
-    // Hook this to the "<" button's OnClick
+
     public void Anterior()
     {
         indiceAtual = (indiceAtual - 1 + itens.Length) % itens.Length;

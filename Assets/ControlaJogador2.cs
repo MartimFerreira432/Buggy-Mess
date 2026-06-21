@@ -183,7 +183,7 @@ public class ControlaJogador2 : MonoBehaviour
         {
             if (cm != null)
             {
-                // Toca o som de comer colecionável
+             
                 if (Sonsemcomum.Instance != null)
                 {
                     Sonsemcomum.Instance.TocarComer();

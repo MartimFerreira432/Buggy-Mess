@@ -1,12 +1,11 @@
 using UnityEngine;
-// Put this on each checkpoint asset/prefab.
-// Requires a Collider2D on the same object, with "Is Trigger" checked.
+
 public class Checkpoint : MonoBehaviour
 {
-    [Header("Optional visual feedback")]
-    public Animator animacao;          // e.g. a flag-raise clip, optional
+
+    public Animator animacao;        
     public string activateTrigger = "Activate";
-    public GameObject indicadorAtivo;  // glow/particle shown once activated, optional
+    public GameObject indicadorAtivo; 
     private bool ativado = false;
     void OnTriggerEnter2D(Collider2D other)
     {

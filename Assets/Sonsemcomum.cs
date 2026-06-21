@@ -7,12 +7,11 @@ public class Sonsemcomum : MonoBehaviour
     private AudioSource audioSourcePassos;
     private AudioSource audioSourcePulo;
 
-    [Header("Configurações de Áudio")]
     public AudioClip somPulo;
     public AudioClip somAtaque;
     public AudioClip somCura;
     public AudioClip somComer;
-    public AudioClip somRespawn; // Arraste o som de renascer/respawn aqui no Inspector
+    public AudioClip somRespawn; 
 
     void Awake()
     {
@@ -87,7 +86,7 @@ public class Sonsemcomum : MonoBehaviour
         }
     }
 
-    // Nova função para tocar o som quando o jogador volta à vida no checkpoint
+   
     public void TocarRespawn()
     {
         if (audioSourcePulo != null && somRespawn != null)

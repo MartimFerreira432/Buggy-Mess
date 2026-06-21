@@ -28,7 +28,7 @@ public class DanoJogador1 : MonoBehaviour
     {
         Debug.Log("Ataque feito");
 
-        // Toca o som de ataque globalmente
+   
         if (Sonsemcomum.Instance != null)
         {
             Sonsemcomum.Instance.TocarAtaque();

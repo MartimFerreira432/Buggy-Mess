@@ -10,7 +10,7 @@ public class Miniboss : MonoBehaviour
     public float alcanceDeteccao = 5f;
     public float distanciaAtaque = 6f;
 
-    [Header("Projeteis")]
+
     public GameObject prefabProjetil;
     public float velocidadeProjetil = 6f;
     public float cadenciaTiroMin = 1f;

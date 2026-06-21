@@ -74,7 +74,7 @@ public class flowerpop : MonoBehaviour
         }
     }
 
-    // 2D physics support
+ 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

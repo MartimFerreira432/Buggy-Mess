@@ -91,7 +91,7 @@ public class CheckpointManager : MonoBehaviour
 
         SnapCamera(checkpointPosition);
 
-        // Toca o som de respawn centralizado
+  
         if (Sonsemcomum.Instance != null)
         {
             Sonsemcomum.Instance.TocarRespawn();

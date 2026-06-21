@@ -24,7 +24,7 @@ public class DanoJogador2 : MonoBehaviour
 
     void Atacar()
     {
-        // Toca o som de ataque globalmente
+       
         if (Sonsemcomum.Instance != null)
         {
             Sonsemcomum.Instance.TocarAtaque();
