@@ -10505,7 +10505,7 @@ MonoBehaviour:
   alcanceDeteccao: 20
   distanciaAtaque: 8
   prefabProjetil: {fileID: 2020843330361009584, guid: ac703b9c59a20de4689b7d40d4f0e516, type: 3}
-  velocidadeProjetil: 9
+  velocidadeProjetil: 11
   cadenciaTiroMin: 1
   cadenciaTiroMax: 3
   danoProjetil: 2
@@ -32936,10 +32936,6 @@ SceneRoots:
   - {fileID: 1491492826}
   - {fileID: 1191034270}
   - {fileID: 1028581083}
- HEAD
-  - {fileID: 143129229}
   - {fileID: 829923319}
-  - {fileID: 1922754914}
-
   - {fileID: 1065238524}
- fec572f94b9d7ec5af09e6e9a92c650fc506f64d
+  - {fileID: 1922754914}

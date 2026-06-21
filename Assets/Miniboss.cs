@@ -1,5 +1,7 @@
 using UnityEngine;
 
+
+
 public class Miniboss : MonoBehaviour
 {
     public Transform Jogador1;
@@ -28,9 +30,8 @@ public class Miniboss : MonoBehaviour
 
     void Update()
     {
-        if (Jogador1 == null && Jogador2 == null) return;
-
         EscolherAlvo();
+
         if (alvoAtual == null) return;
 
         float distanciaAlvo = Vector2.Distance(transform.position, alvoAtual.position);
@@ -42,17 +43,25 @@ public class Miniboss : MonoBehaviour
 
     void EscolherAlvo()
     {
-        if (Jogador1 == null && Jogador2 == null) return;
-        if (Jogador1 == null)
+        bool j1Valido = Jogador1 != null && Jogador1.gameObject.activeInHierarchy;
+        bool j2Valido = Jogador2 != null && Jogador2.gameObject.activeInHierarchy;
+
+        if (!j1Valido && !j2Valido)
+        {
+            alvoAtual = null;
+            return;
+        }
+        if (!j1Valido)
         {
             alvoAtual = Jogador2;
             return;
         }
-        if (Jogador2 == null)
+        if (!j2Valido)
         {
             alvoAtual = Jogador1;
             return;
         }
+
         float dist1 = Vector2.Distance(transform.position, Jogador1.position);
         float dist2 = Vector2.Distance(transform.position, Jogador2.position);
         alvoAtual = (dist1 < dist2) ? Jogador1 : Jogador2;
@@ -61,7 +70,6 @@ public class Miniboss : MonoBehaviour
     void Perseguir()
     {
         float distancia = Vector2.Distance(transform.position, alvoAtual.position);
-
         Virar(alvoAtual.position.x - transform.position.x);
 
         if (distancia > distanciaAtaque)
@@ -92,12 +100,10 @@ public class Miniboss : MonoBehaviour
     void Virar(float direcaoX)
     {
         Vector3 escala = animacaovoa.transform.localScale;
-
         if (direcaoX > 0)
             escala.x = -Mathf.Abs(escala.x);
         else if (direcaoX < 0)
             escala.x = Mathf.Abs(escala.x);
-
         animacaovoa.transform.localScale = escala;
     }
 

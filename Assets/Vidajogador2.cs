@@ -3,7 +3,6 @@ using UnityEngine;
 public class Vidajogador2 : MonoBehaviour
 {
     public Vidajogador1 vidaDaVaca;
-
     private Animator animacao;
     private ControlaJogador2 jogador;
     private bool estaMorto = false;
@@ -12,7 +11,6 @@ public class Vidajogador2 : MonoBehaviour
     {
         animacao = GetComponentInChildren<Animator>();
         jogador = GetComponent<ControlaJogador2>();
-
         if (vidaDaVaca != null)
             vidaDaVaca.OnMorrer += Morrer;
     }
@@ -31,9 +29,7 @@ public class Vidajogador2 : MonoBehaviour
     public void Receberdano(int monte, Transform atacante)
     {
         if (estaMorto || vidaDaVaca == null) return;
-
         vidaDaVaca.Receberdano(monte, atacante);
-
         if (!estaMorto && jogador != null)
         {
             jogador.aAtacar = true;
@@ -42,11 +38,16 @@ public class Vidajogador2 : MonoBehaviour
         }
     }
 
+    public void MorteInstantanea()
+    {
+        if (estaMorto || vidaDaVaca == null) return;
+        vidaDaVaca.MorteInstantanea();
+    }
+
     void Morrer()
     {
         if (estaMorto) return;
         estaMorto = true;
-
         if (jogador != null)
         {
             jogador.aAtacar = true;
@@ -56,7 +57,6 @@ public class Vidajogador2 : MonoBehaviour
                 rb.bodyType = RigidbodyType2D.Static;
             }
         }
-
         Vector3 escala = transform.localScale;
         escala.x = Mathf.Abs(escala.x);
         transform.localScale = escala;
@@ -66,13 +66,10 @@ public class Vidajogador2 : MonoBehaviour
     public void ResetVida()
     {
         estaMorto = false;
-
         if (jogador != null)
             jogador.aAtacar = false;
-
         if (animacao != null)
             animacao.speed = 1f;
-
         if (TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
         {
             rb.bodyType = RigidbodyType2D.Dynamic;

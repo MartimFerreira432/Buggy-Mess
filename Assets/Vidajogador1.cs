@@ -6,11 +6,9 @@ public class Vidajogador1 : MonoBehaviour
     public int vida;
     public int vidaMaxima = 10;
     public Barravida barraDeVida;
-
     private Animator animacao;
     private ControlaJogador jogador;
     private bool estaMorto = false;
-
     public event Action OnMorrer;
 
     void Awake()
@@ -29,10 +27,8 @@ public class Vidajogador1 : MonoBehaviour
     public void Receberdano(int monte, Transform atacante)
     {
         if (estaMorto) return;
-
         vida -= monte;
         barraDeVida?.AtualizarVida(vida, vidaMaxima);
-
         if (vida <= 0)
         {
             Morrer();
@@ -45,11 +41,18 @@ public class Vidajogador1 : MonoBehaviour
         }
     }
 
+    public void MorteInstantanea()
+    {
+        if (estaMorto) return;
+        vida = 0;
+        barraDeVida?.AtualizarVida(vida, vidaMaxima);
+        Morrer();
+    }
+
     void Morrer()
     {
         if (estaMorto) return;
         estaMorto = true;
-
         if (jogador != null)
         {
             jogador.aAtacar = true;
@@ -59,14 +62,11 @@ public class Vidajogador1 : MonoBehaviour
                 rb.bodyType = RigidbodyType2D.Static;
             }
         }
-
         if (jogador != null && jogador.direcao == 1)
             animacao.Play("Vacamortadireita");
         else
             animacao.Play("Vacamortaesquerda");
-
         OnMorrer?.Invoke();
-
         Invoke(nameof(AcionarRespawn), 1.0f);
     }
 
@@ -82,18 +82,14 @@ public class Vidajogador1 : MonoBehaviour
     {
         vida = vidaMaxima;
         estaMorto = false;
-
         if (jogador != null)
             jogador.aAtacar = false;
-
         if (animacao != null)
             animacao.speed = 1f;
-
         if (TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
         {
             rb.bodyType = RigidbodyType2D.Dynamic;
         }
-
         barraDeVida?.AtualizarVida(vida, vidaMaxima);
     }
 
@@ -106,17 +102,13 @@ public class Vidajogador1 : MonoBehaviour
     public void Curar(int quantidade)
     {
         if (estaMorto) return;
-
-        // Toca o som de cura globalmente
         if (Sonsemcomum.Instance != null)
         {
             Sonsemcomum.Instance.TocarCura();
         }
-
         vida += quantidade;
         if (vida > vidaMaxima)
             vida = vidaMaxima;
-
         barraDeVida?.AtualizarVida(vida, vidaMaxima);
     }
 }
