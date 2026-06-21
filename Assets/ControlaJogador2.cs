@@ -127,14 +127,14 @@ public class ControlaJogador2 : MonoBehaviour
 
         if (salto < 2)
         {
-            // Está no ar (a subir ou a cair): mantém a pose de salto sem repetir a animação.
+           
             if (AudioManager.Instance != null) AudioManager.Instance.TocarPassos(false);
             PlayAnim("abelhasaltadirei");
 
             var info = animacao.GetCurrentAnimatorStateInfo(0);
             if (info.IsName("abelhasaltadirei") && info.normalizedTime >= 1f)
             {
-                animacao.speed = 0f; // congela no último frame até aterrar
+                animacao.speed = 0f; 
             }
         }
         else if (vel > 0.1f)
@@ -164,7 +164,7 @@ public class ControlaJogador2 : MonoBehaviour
 
             if (Normalparede.y > 0.5f)
             {
-                // Aterrou no chão: liberta o salto e volta a animação ao normal.
+                
                 salto = 2;
                 if (animacao != null) animacao.speed = 1f;
             }

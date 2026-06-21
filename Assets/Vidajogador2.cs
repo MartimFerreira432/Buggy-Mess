@@ -2,17 +2,25 @@ using UnityEngine;
 
 public class Vidajogador2 : MonoBehaviour
 {
-    public int vida;
-    public int vidaMaxima = 10;
+    public Vidajogador1 vidaDaVaca; // arrasta aqui o GameObject da vaca (o que tem o Vidajogador1)
+
     private Animator animacao;
     private ControlaJogador2 jogador;
     private bool estaMorto = false;
 
-    void Start()
+    void Awake()
     {
-        vida = vidaMaxima;
         animacao = GetComponentInChildren<Animator>();
         jogador = GetComponent<ControlaJogador2>();
+
+        if (vidaDaVaca != null)
+            vidaDaVaca.OnMorrer += Morrer;
+    }
+
+    void OnDestroy()
+    {
+        if (vidaDaVaca != null)
+            vidaDaVaca.OnMorrer -= Morrer;
     }
 
     public void Receberdano(int monte)
@@ -22,28 +30,22 @@ public class Vidajogador2 : MonoBehaviour
 
     public void Receberdano(int monte, Transform atacante)
     {
-        if (estaMorto) return;
+        if (estaMorto || vidaDaVaca == null) return;
 
-        vida -= monte;
+        // Passa o dano para a vaca calcular
+        vidaDaVaca.Receberdano(monte, atacante);
 
-        if (vida <= 0)
-        {
-            Morrer(atacante);
-        }
-        else if (jogador != null)
+        if (!estaMorto && jogador != null)
         {
             jogador.aAtacar = true;
-
-            // Usa sempre o mesmo clip; a direção é tratada pelo flip (transform.localScale)
-            // que já está definido por "direcao" e fica congelado durante o aAtacar
             animacao.Play("Abelhadanodireita");
-
             Invoke(nameof(PararDano), 0.4f);
         }
     }
 
-    void Morrer(Transform atacante)
+    void Morrer()
     {
+        if (estaMorto) return;
         estaMorto = true;
 
         if (jogador != null)
@@ -57,30 +59,36 @@ public class Vidajogador2 : MonoBehaviour
         }
 
         // Última combinação a testar: scale positivo + clip "direita"
-           Vector3 escala = transform.localScale;
+        Vector3 escala = transform.localScale;
         escala.x = Mathf.Abs(escala.x);
         transform.localScale = escala;
         animacao.Play("Abelhamortadireita");
-
-        Invoke(nameof(AcionarRespawn), 1.0f);
-    }
-
-    void AcionarRespawn()
-    {
-        CheckpointManager.Instance.Respawn();
     }
 
     public void ResetVida()
     {
-        vida = vidaMaxima;
         estaMorto = false;
-        if (jogador != null) jogador.aAtacar = false;
-        if (animacao != null) animacao.speed = 1f;
+
+        if (jogador != null)
+            jogador.aAtacar = false;
+
+        if (animacao != null)
+            animacao.speed = 1f;
+
+        if (TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic; // Devolve o movimento à abelha
+        }
     }
 
     void PararDano()
     {
         if (jogador != null && !estaMorto)
             jogador.aAtacar = false;
+    }
+
+    public void Curar(int quantidade)
+    {
+        vidaDaVaca?.Curar(quantidade);
     }
 }

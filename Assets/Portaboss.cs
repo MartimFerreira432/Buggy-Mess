@@ -8,7 +8,7 @@ public class Portaboss : MonoBehaviour
 
     void Update()
     {
-      
+       
         if (jogadorEstaNaPorta && Keyboard.current.wKey.wasPressedThisFrame)
         {
            

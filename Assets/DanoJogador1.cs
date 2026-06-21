@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+
 public class DanoJogador1 : MonoBehaviour
 {
     public float alcanceAtaque = 2f;
-    public LayerMask inimigos;
 
     private Animator animacao;
     private ControlaJogador jogador;
@@ -19,7 +20,6 @@ public class DanoJogador1 : MonoBehaviour
 
     void Update()
     {
-     
         if (Keyboard.current.fKey.wasPressedThisFrame)
         {
             Atacar();
@@ -34,13 +34,11 @@ public class DanoJogador1 : MonoBehaviour
         {
             jogador.aAtacar = true;
 
-          
             if (animacao != null)
             {
                 animacao.Play("Vacaataquedireita");
             }
 
-     
             if (rb != null)
             {
                 rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
@@ -49,25 +47,45 @@ public class DanoJogador1 : MonoBehaviour
             Invoke(nameof(PararAtaque), 0.5f);
         }
 
-  
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, alcanceAtaque, inimigos);
+        // AGORA: O OverlapCircle deteta TODOS os colisores num raio de alcanceAtaque (sem filtro de layer)
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, alcanceAtaque);
 
-        foreach (Collider2D inimigo in hits)
+        foreach (Collider2D colisorAtingido in hits)
         {
-            Debug.Log("Atingi: " + inimigo.name);
-
-            var vidaTerrestre = inimigo.GetComponent<Vidainimigoterrestre>();
-            if (vidaTerrestre != null)
+            // 1. Se o colisor tiver a Tag de Inimigo Comum
+            if (colisorAtingido.CompareTag("Inimigo"))
             {
-                vidaTerrestre.Receberdano(1);
-                continue;
+                Debug.Log("Atingi Inimigo Comum: " + colisorAtingido.name);
+
+                var vidaTerrestre = colisorAtingido.GetComponent<Vidainimigoterrestre>();
+                if (vidaTerrestre != null)
+                {
+                    vidaTerrestre.Receberdano(1);
+                    continue;
+                }
+
+                var vidaVoador = colisorAtingido.GetComponent<Vidainimigovoador>();
+                if (vidaVoador != null)
+                {
+                    vidaVoador.Receberdano(1);
+                    continue;
+                }
             }
 
-            var vidaVoador = inimigo.GetComponent<Vidainimigovoador>();
-            if (vidaVoador != null)
+            // 2. Se o colisor tiver a Tag do Boss
+            if (colisorAtingido.CompareTag("Boss"))
             {
-                vidaVoador.Receberdano(1);
+                Debug.Log("Atingi o Boss: " + colisorAtingido.name);
+
+                var vidaMiniboss = colisorAtingido.GetComponent<Vidaminiboss>();
+                if (vidaMiniboss != null)
+                {
+                    vidaMiniboss.Receberdano(1);
+                }
             }
+
+            // Qualquer outra coisa (como o Chão/Tilemap) vai entrar aqui no loop,
+            // mas como não tem a Tag "Inimigo" nem "Boss", o código simplesmente ignora!
         }
     }
 
@@ -78,6 +96,5 @@ public class DanoJogador1 : MonoBehaviour
             jogador.aAtacar = false;
         }
     }
-
-
 }
+   
