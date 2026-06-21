@@ -5,13 +5,12 @@ public class Vidajogador1 : MonoBehaviour
 {
     public int vida;
     public int vidaMaxima = 10;
-    public Barravida barraDeVida; // a única barra, partilhada pelos dois
+    public Barravida barraDeVida;
 
     private Animator animacao;
     private ControlaJogador jogador;
     private bool estaMorto = false;
 
-    // A abelha "ouve" este evento para saber quando deve morrer também
     public event Action OnMorrer;
 
     void Awake()
@@ -66,10 +65,8 @@ public class Vidajogador1 : MonoBehaviour
         else
             animacao.Play("Vacamortaesquerda");
 
-        // Dispara o evento para a abelha morrer também
         OnMorrer?.Invoke();
 
-        // Chama o Respawn após 1 segundo (Sem destruir o objeto)
         Invoke(nameof(AcionarRespawn), 1.0f);
     }
 
@@ -94,7 +91,7 @@ public class Vidajogador1 : MonoBehaviour
 
         if (TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
         {
-            rb.bodyType = RigidbodyType2D.Dynamic; // Devolve o movimento físico ao jogador
+            rb.bodyType = RigidbodyType2D.Dynamic;
         }
 
         barraDeVida?.AtualizarVida(vida, vidaMaxima);
@@ -109,6 +106,12 @@ public class Vidajogador1 : MonoBehaviour
     public void Curar(int quantidade)
     {
         if (estaMorto) return;
+
+        // Toca o som de cura globalmente
+        if (Sonsemcomum.Instance != null)
+        {
+            Sonsemcomum.Instance.TocarCura();
+        }
 
         vida += quantidade;
         if (vida > vidaMaxima)

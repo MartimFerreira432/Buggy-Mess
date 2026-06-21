@@ -80,12 +80,16 @@ public class ControlaJogador : MonoBehaviour
                 RB.linearVelocity = Vector2.zero;
                 RB.AddForce(new Vector2(Normalparede.x * 800, 700f));
                 naParede = false;
+
+                if (Sonsemcomum.Instance != null) Sonsemcomum.Instance.TocarPulo();
             }
             else if (salto > 0)
             {
                 RB.linearVelocity = new Vector2(RB.linearVelocity.x, 0);
                 RB.AddForce(new Vector2(0, 700f));
                 salto--;
+
+                if (Sonsemcomum.Instance != null) Sonsemcomum.Instance.TocarPulo();
             }
         }
 
@@ -122,26 +126,25 @@ public class ControlaJogador : MonoBehaviour
 
         if (salto < 2)
         {
-            // Está no ar (a subir ou a cair): mantém a pose de salto sem repetir a animação.
-            if (AudioManager.Instance != null) AudioManager.Instance.TocarPassos(false);
+            if (Sonsemcomum.Instance != null) Sonsemcomum.Instance.TocarPassos(false);
             PlayAnim("Vacasaltadirei");
 
             var info = animacao.GetCurrentAnimatorStateInfo(0);
             if (info.IsName("Vacasaltadirei") && info.normalizedTime >= 1f)
             {
-                animacao.speed = 0f; // congela no último frame até aterrar
+                animacao.speed = 0f;
             }
         }
         else if (vel > 0.1f)
         {
             animacao.speed = 1f;
             PlayAnim("Vacaandardireita");
-            if (AudioManager.Instance != null) AudioManager.Instance.TocarPassos(true);
+            if (Sonsemcomum.Instance != null) Sonsemcomum.Instance.TocarPassos(true);
         }
         else
         {
             animacao.speed = 1f;
-            if (AudioManager.Instance != null) AudioManager.Instance.TocarPassos(false);
+            if (Sonsemcomum.Instance != null) Sonsemcomum.Instance.TocarPassos(false);
             PlayAnim("Vacanormaldireita");
         }
     }
@@ -159,7 +162,6 @@ public class ControlaJogador : MonoBehaviour
 
             if (Normalparede.y > 0.5f)
             {
-                // Aterrou no chão: liberta o salto e volta a animação ao normal.
                 salto = 2;
                 if (animacao != null) animacao.speed = 1f;
             }
@@ -176,6 +178,12 @@ public class ControlaJogador : MonoBehaviour
         {
             if (cm != null)
             {
+                // Toca o som de comer colecionável
+                if (Sonsemcomum.Instance != null)
+                {
+                    Sonsemcomum.Instance.TocarComer();
+                }
+
                 cm.collectiblecount++;
                 Destroy(collision.gameObject);
             }

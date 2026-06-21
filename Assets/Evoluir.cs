@@ -1,7 +1,9 @@
 using UnityEngine;
+
 public class Evoluir : MonoBehaviour
 {
     public int cura = 3;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Vidajogador1 jogador1 = collision.GetComponent<Vidajogador1>();
@@ -20,4 +22,3 @@ public class Evoluir : MonoBehaviour
         }
     }
 }
-
