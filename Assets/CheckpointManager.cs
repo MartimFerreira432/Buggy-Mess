@@ -1,14 +1,18 @@
 using UnityEngine;
-// Put this on a persistent GameObject in your scene (e.g. "GameManagers")
+using UnityEngine.SceneManagement;
+
+// This object must persist across scene loads.
+// Put it in your MAIN scene only (not the Boss scene) — DontDestroyOnLoad
+// will carry it into the Boss scene automatically when that scene loads.
 public class CheckpointManager : MonoBehaviour
 {
     public static CheckpointManager Instance { get; private set; }
-    [Header("References (drag these in)")]
-    public Jogadormanager jogadorManager;
-    public GameObject Jogador;
-    public GameObject Jogador2;
+
     private Vector3 checkpointPosition;
+    private string checkpointSceneName;
     private bool hasCheckpoint = false;
+    private bool respawnPending = false;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -17,39 +21,90 @@ public class CheckpointManager : MonoBehaviour
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
-    // Called by Checkpoint.cs when a player crosses one
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // Called by Checkpoint.cs when a player crosses one (main scene only)
     public void SetCheckpoint(Vector3 position)
     {
         checkpointPosition = position;
+        checkpointSceneName = SceneManager.GetActiveScene().name;
         hasCheckpoint = true;
-        Debug.Log("Checkpoint guardado em: " + position);
+        Debug.Log("Checkpoint guardado em: " + position + " na cena " + checkpointSceneName);
     }
-    // Called by Vidajogador1/2 when the active character dies
+
+    // Called by Vidajogador1/2 when the active character dies, in ANY scene
     public void Respawn()
     {
-        Vector3 pos = hasCheckpoint ? checkpointPosition : Jogador.transform.position;
-        // Reset both characters' health, regardless of which one died
-        var vida1 = Jogador.GetComponent<Vidajogador1>();
-        var vida2 = Jogador2.GetComponent<Vidajogador2>();
+        if (!hasCheckpoint)
+        {
+            Debug.LogWarning("Sem checkpoint guardado ainda — não é possível respawnar.");
+            return;
+        }
+
+        respawnPending = true;
+        SceneManager.LoadScene(checkpointSceneName);
+        // Actual repositioning happens in OnSceneLoaded below, once the
+        // scene (and its Jogador/Jogador2/Jogadormanager) actually exist.
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (!respawnPending) return;
+        respawnPending = false;
+
+        // Find this scene's player objects fresh — can't use old serialized
+        // references, since those belonged to whatever scene was loaded before.
+        GameObject jogador = GameObject.Find("Jogador");
+        GameObject jogador2 = GameObject.Find("Jogador2");
+        Jogadormanager jogadorManager = FindAnyObjectByType<Jogadormanager>();
+
+        if (jogador == null || jogador2 == null || jogadorManager == null)
+        {
+            Debug.LogError("Respawn: não encontrei Jogador/Jogador2/Jogadormanager na cena " + scene.name);
+            return;
+        }
+
+        var vida1 = jogador.GetComponent<Vidajogador1>();
+        var vida2 = jogador2.GetComponent<Vidajogador2>();
         if (vida1 != null) vida1.ResetVida();
         if (vida2 != null) vida2.ResetVida();
-        // Re-enable physics on whichever GameObjects got frozen on death
-        ReativarFisica(Jogador);
-        ReativarFisica(Jogador2);
-        // Snap whichever character is currently active to the checkpoint;
-        // keep the inactive one parked at the same spot too, so a swap
-        // right after respawn doesn't teleport from some old position
-        Jogador.transform.position = pos;
-        Jogador2.transform.position = pos;
-        // Make sure player 1 is the one active after respawn
-        // (skip this call if you'd rather keep whichever was active before death)
-        jogadorManager.SendMessage("DefinirJogador1");
-        // Snap the camera straight to the new position, otherwise it
-        // slowly drifts back via the dead-zone follow logic
-        SnapCamera(pos);
-        Debug.Log("Jogador respawnado em: " + pos);
+
+        ReativarFisica(jogador);
+        ReativarFisica(jogador2);
+
+        jogador.transform.position = checkpointPosition;
+        jogador2.transform.position = checkpointPosition;
+
+        // Force player 1 (cow) active, player 2 (bee) inactive — explicitly,
+        // instead of relying on Jogadormanager's own Start()/SendMessage timing.
+        var controlaJogador1 = jogador.GetComponent<ControlaJogador>();
+        var controlaJogador2 = jogador2.GetComponent<ControlaJogador2>();
+        if (controlaJogador1 != null) controlaJogador1.enabled = true;
+        if (controlaJogador2 != null) controlaJogador2.enabled = false;
+
+        jogador.SetActive(true);
+        jogador2.SetActive(false);
+
+        jogadorManager.jogadorativo = true;
+        PlayerPrefs.SetInt("JogadorAtivoSalvo", 1);
+        PlayerPrefs.Save();
+
+        SnapCamera(checkpointPosition);
+
+        Debug.Log("Jogador respawnado em: " + checkpointPosition + " na cena " + scene.name);
     }
+
     private void ReativarFisica(GameObject jogador)
     {
         if (jogador.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
@@ -58,13 +113,14 @@ public class CheckpointManager : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
         }
     }
+
     private void SnapCamera(Vector3 pos)
     {
         Camera cam = Camera.main;
         if (cam == null) return;
         Vector3 camPos = cam.transform.position;
         camPos.x = pos.x;
-        camPos.y = pos.y + 2.5f; // matches the +2.5f y-offset used in ControlaJogador/2's FixedUpdate
+        camPos.y = pos.y + 2.5f;
         cam.transform.position = camPos;
     }
 }
