@@ -349,6 +349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   vida: 0
   vidaMaxima: 10
+  barraDeVida: {fileID: 1296751369}
 --- !u!114 &118381796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,9 +363,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   alcanceAtaque: 2
-  inimigos:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!1 &135756359
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,8 +719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901232882131cb14c84113c8b244577e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  vida: 0
-  vidaMaxima: 10
+  vidaDaVaca: {fileID: 118381795}
 --- !u!114 &317223568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -736,9 +733,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   alcanceAtaque: 2
-  inimigos:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!61 &317223569
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1437,6 +1431,7 @@ RectTransform:
   m_Children:
   - {fileID: 992085648}
   - {fileID: 970214475}
+  - {fileID: 1296751372}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3403,7 +3398,7 @@ GameObject:
   - component: {fileID: 966439023}
   m_Layer: 0
   m_Name: InimigoVoador
-  m_TagString: Untagged
+  m_TagString: Inimigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3433,14 +3428,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966439018}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -3451,7 +3446,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &966439021
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3580,7 +3575,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 112.41342, y: 154.27963}
+  m_AnchoredPosition: {x: 20.997, y: 128.4}
   m_SizeDelta: {x: 41.7328, y: 41.7328}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &970214476
@@ -3603,7 +3598,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2974486877961535236, guid: 6a7d765fc9340144d8b75ac55905d669, type: 3}
+  m_Sprite: {fileID: 3373568495408583166, guid: ce85bc4a10175d64482641cb8cb394bf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3655,7 +3650,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 188.87532, y: -70.60777}
+  m_AnchoredPosition: {x: 97.461914, y: -100.887436}
   m_SizeDelta: {x: 111.1973, y: 39.0013}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &992085649
@@ -3681,7 +3676,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 20
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 65
@@ -3924,6 +3919,105 @@ Transform:
   m_Children: []
   m_Father: {fileID: 711188403}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1296751368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1296751372}
+  - component: {fileID: 1296751371}
+  - component: {fileID: 1296751370}
+  - component: {fileID: 1296751369}
+  m_Layer: 5
+  m_Name: Barravida
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1296751369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296751368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709b05598a50ff94aa970280a86878af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  sprites:
+  - {fileID: -6170077548484242025, guid: 9ffa00d4f4c59f74abc103b66df3e90a, type: 3}
+  - {fileID: -7837403383869157933, guid: 9d246c900c8afd94e9062fc5a217eb92, type: 3}
+  - {fileID: 4429723619858525374, guid: 72ebefc11b9d23846bc835a556b92a1a, type: 3}
+  - {fileID: -2929169891607675353, guid: bb2e91c71b7823a4b97a779a12222384, type: 3}
+  - {fileID: 5482983669926523856, guid: d4f5fc7d1a0bda642ade50da1e5f0988, type: 3}
+  - {fileID: 6689844286507901615, guid: 63776d100cebf1640814f95b6e643cdd, type: 3}
+  - {fileID: 775756845410877709, guid: 68ff047f1e9a44f43b16f89beed65308, type: 3}
+  - {fileID: -3775316921956324950, guid: 7c6f463566ff04940be33c689512aeb6, type: 3}
+  - {fileID: -9168735068763562810, guid: b583cfe1706d6fc4187a758407f8013e, type: 3}
+  imagemBarra: {fileID: 0}
+--- !u!114 &1296751370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296751368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -6170077548484242025, guid: 9ffa00d4f4c59f74abc103b66df3e90a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1296751371
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296751368}
+  m_CullTransparentMesh: 1
+--- !u!224 &1296751372
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296751368}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 608051088}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -324.8745, y: 185.35027}
+  m_SizeDelta: {x: 150.251, y: 79.0795}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1508887319
 GameObject:
   m_ObjectHideFlags: 0
@@ -4119,7 +4213,7 @@ GameObject:
   - component: {fileID: 1657611372}
   - component: {fileID: 1657611371}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4829,7 +4923,7 @@ GameObject:
   - component: {fileID: 5547849759164924221}
   m_Layer: 0
   m_Name: InimigoTerrestre
-  m_TagString: Untagged
+  m_TagString: Inimigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5009,14 +5103,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5056222518260728510}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -5027,7 +5121,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

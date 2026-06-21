@@ -2,17 +2,36 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
-public class Portaboss : MonoBehaviour
+public class PortaVoltar : MonoBehaviour
 {
     private bool jogadorEstaNaPorta = false;
+    private bool bossDerrotado = false;
+
+    private void OnEnable()
+    {
+
+        Vidaminiboss.OnBossMorreu += LiberarPorta;
+    }
+
+    private void OnDisable()
+    {
+     
+        Vidaminiboss.OnBossMorreu -= LiberarPorta;
+    }
+
+    private void LiberarPorta()
+    {
+        bossDerrotado = true;
+        Debug.Log("O Boss morreu! A porta para voltar está aberta.");
+    }
 
     void Update()
     {
        
-        if (jogadorEstaNaPorta && Keyboard.current.wKey.wasPressedThisFrame)
+        if (jogadorEstaNaPorta && bossDerrotado && Keyboard.current.wKey.wasPressedThisFrame)
         {
-           
-            SceneManager.LoadScene("Boss");
+      
+            SceneManager.LoadScene("Messy bug saves");
         }
     }
 

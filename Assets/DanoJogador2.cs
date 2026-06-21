@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
 public class DanoJogador2 : MonoBehaviour
 {
     public float alcanceAtaque = 2f;
-    public LayerMask inimigos;
+
     private Animator animacao;
     private ControlaJogador2 jogador;
 
@@ -29,20 +28,47 @@ public class DanoJogador2 : MonoBehaviour
         {
             jogador.aAtacar = true;
 
-            // Usa sempre o mesmo clip; a direção é tratada pelo flip (transform.localScale)
-            // que já está definido por "direcao" e fica congelado durante o aAtacar
-            animacao.Play("abelhaataquedirei");
+            // Mantém a tua animação da abelha a atacar
+            if (animacao != null)
+            {
+                animacao.Play("abelhaataquedirei");
+            }
 
             Invoke(nameof(PararAtaque), 0.5f);
         }
 
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, alcanceAtaque, inimigos);
-        foreach (Collider2D inimigo in hits)
+        // Removeu-se a LayerMask para detetar por Tags (assim como no Jogador 1)
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, alcanceAtaque);
+
+        foreach (Collider2D colisorAtingido in hits)
         {
-            var vidaTerrestre = inimigo.GetComponent<Vidainimigoterrestre>();
-            if (vidaTerrestre != null) { vidaTerrestre.Receberdano(1); continue; }
-            var vidaVoador = inimigo.GetComponent<Vidainimigovoador>();
-            if (vidaVoador != null) { vidaVoador.Receberdano(1); }
+            // 1. Se o colisor tiver a Tag de Inimigo Comum (terrestres e voadores pequenos)
+            if (colisorAtingido.CompareTag("Inimigo"))
+            {
+                var vidaTerrestre = colisorAtingido.GetComponent<Vidainimigoterrestre>();
+                if (vidaTerrestre != null)
+                {
+                    vidaTerrestre.Receberdano(1);
+                    continue;
+                }
+
+                var vidaVoador = colisorAtingido.GetComponent<Vidainimigovoador>();
+                if (vidaVoador != null)
+                {
+                    vidaVoador.Receberdano(1);
+                }
+            }
+
+            // 2. Se o colisor tiver a Tag do Boss
+            if (colisorAtingido.CompareTag("Boss"))
+            {
+                var vidaMiniboss = colisorAtingido.GetComponent<Vidaminiboss>();
+                if (vidaMiniboss != null)
+                {
+                    vidaMiniboss.Receberdano(1);
+                    Debug.Log("Jogador 2 (Abelha) deu dano no Miniboss!");
+                }
+            }
         }
     }
 

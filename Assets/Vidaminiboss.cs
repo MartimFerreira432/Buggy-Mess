@@ -1,9 +1,11 @@
 using UnityEngine;
-
-
+using System;
 
 public class Vidaminiboss : MonoBehaviour
 {
+
+    public static event Action OnBossMorreu;
+
     public int vida;
     public int vidaMaxima = 10;
     public float tempoAteDestruir = 1f;
@@ -46,11 +48,17 @@ public class Vidaminiboss : MonoBehaviour
         if (animacao != null)
             animacao.Play("Minibossmorte");
 
-        // Desliga o movimento/ataque e o colisor enquanto a animação de morte toca
+        if (OnBossMorreu != null)
+        {
+            OnBossMorreu.Invoke();
+        }
+
+     
         Miniboss movimento = GetComponent<Miniboss>();
         if (movimento != null)
             movimento.enabled = false;
 
+    
         Collider2D colisor = GetComponent<Collider2D>();
         if (colisor != null)
             colisor.enabled = false;

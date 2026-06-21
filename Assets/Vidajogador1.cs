@@ -1,18 +1,25 @@
 using UnityEngine;
+using System;
 
 public class Vidajogador1 : MonoBehaviour
 {
     public int vida;
     public int vidaMaxima = 10;
+    public Barravida barraDeVida; // a única barra, partilhada pelos dois
+
     private Animator animacao;
     private ControlaJogador jogador;
     private bool estaMorto = false;
 
-    void Start()
+    // A abelha "ouve" este evento para saber quando deve morrer também
+    public event Action OnMorrer;
+
+    void Awake()
     {
         vida = vidaMaxima;
         animacao = GetComponentInChildren<Animator>();
         jogador = GetComponent<ControlaJogador>();
+        barraDeVida?.AtualizarVida(vida, vidaMaxima);
     }
 
     public void Receberdano(int monte)
@@ -25,24 +32,24 @@ public class Vidajogador1 : MonoBehaviour
         if (estaMorto) return;
 
         vida -= monte;
+        barraDeVida?.AtualizarVida(vida, vidaMaxima);
 
         if (vida <= 0)
         {
-            Morrer(atacante);
+            Morrer();
         }
         else if (jogador != null)
         {
             jogador.aAtacar = true;
 
-            
             animacao.Play("Vacadanoesq");
-
             Invoke(nameof(PararDano), 0.4f);
         }
     }
 
-    void Morrer(Transform atacante)
+    void Morrer()
     {
+        if (estaMorto) return;
         estaMorto = true;
 
         if (jogador != null)
@@ -55,18 +62,29 @@ public class Vidajogador1 : MonoBehaviour
             }
         }
 
-        
         if (jogador != null && jogador.direcao == 1)
             animacao.Play("Vacamortadireita");
         else
             animacao.Play("Vacamortaesquerda");
-
         Destroy(gameObject, 1.0f);
+
+        OnMorrer?.Invoke();
     }
 
     void PararDano()
     {
         if (jogador != null && !estaMorto)
             jogador.aAtacar = false;
+    }
+
+    public void Curar(int quantidade)
+    {
+        if (estaMorto) return;
+
+        vida += quantidade;
+        if (vida > vidaMaxima)
+            vida = vidaMaxima;
+
+        barraDeVida?.AtualizarVida(vida, vidaMaxima);
     }
 }
