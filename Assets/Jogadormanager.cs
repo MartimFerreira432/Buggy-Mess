@@ -16,7 +16,11 @@ public class Jogadormanager : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.qKey.wasPressedThisFrame) { TrocarJogador(); }
+        if (Keyboard.current.qKey.wasPressedThisFrame)
+        {
+            Debug.Log("Q pressionado, jogadorativo atual: " + jogadorativo);
+            TrocarJogador();
+        }
     }
 
     public void TrocarJogador()
@@ -25,10 +29,8 @@ public class Jogadormanager : MonoBehaviour
         {
             Vector3 pos = Jogador.transform.position;
             int dir = controlaJogador1.direcao;
-
             Jogador2.transform.position = pos;
             DefinirJogador2();
-
             controlaJogador2.direcao = dir;
             Jogador2.transform.localScale = new Vector3(dir, 1, 1);
         }
@@ -36,10 +38,8 @@ public class Jogadormanager : MonoBehaviour
         {
             Vector3 pos = Jogador2.transform.position;
             int dir = controlaJogador2.direcao;
-
             Jogador.transform.position = pos;
             DefinirJogador1();
-
             controlaJogador1.direcao = dir;
             Jogador.transform.localScale = new Vector3(dir, 1, 1);
         }
