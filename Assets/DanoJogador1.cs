@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-
 public class DanoJogador1 : MonoBehaviour
 {
     public float alcanceAtaque = 2f;
@@ -30,6 +28,12 @@ public class DanoJogador1 : MonoBehaviour
     {
         Debug.Log("Ataque feito");
 
+        // Toca o som de ataque globalmente
+        if (Sonsemcomum.Instance != null)
+        {
+            Sonsemcomum.Instance.TocarAtaque();
+        }
+
         if (jogador != null)
         {
             jogador.aAtacar = true;
@@ -47,12 +51,10 @@ public class DanoJogador1 : MonoBehaviour
             Invoke(nameof(PararAtaque), 0.5f);
         }
 
-        // AGORA: O OverlapCircle deteta TODOS os colisores num raio de alcanceAtaque (sem filtro de layer)
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, alcanceAtaque);
 
         foreach (Collider2D colisorAtingido in hits)
         {
-            // 1. Se o colisor tiver a Tag de Inimigo Comum
             if (colisorAtingido.CompareTag("Inimigo"))
             {
                 Debug.Log("Atingi Inimigo Comum: " + colisorAtingido.name);
@@ -72,7 +74,6 @@ public class DanoJogador1 : MonoBehaviour
                 }
             }
 
-            // 2. Se o colisor tiver a Tag do Boss
             if (colisorAtingido.CompareTag("Boss"))
             {
                 Debug.Log("Atingi o Boss: " + colisorAtingido.name);
@@ -83,9 +84,6 @@ public class DanoJogador1 : MonoBehaviour
                     vidaMiniboss.Receberdano(1);
                 }
             }
-
-            // Qualquer outra coisa (como o Chão/Tilemap) vai entrar aqui no loop,
-            // mas como não tem a Tag "Inimigo" nem "Boss", o código simplesmente ignora!
         }
     }
 
@@ -97,4 +95,3 @@ public class DanoJogador1 : MonoBehaviour
         }
     }
 }
-   

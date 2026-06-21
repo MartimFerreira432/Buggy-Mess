@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Vidajogador2 : MonoBehaviour
 {
-    public Vidajogador1 vidaDaVaca; // arrasta aqui o GameObject da vaca (o que tem o Vidajogador1)
+    public Vidajogador1 vidaDaVaca;
 
     private Animator animacao;
     private ControlaJogador2 jogador;
@@ -32,7 +32,6 @@ public class Vidajogador2 : MonoBehaviour
     {
         if (estaMorto || vidaDaVaca == null) return;
 
-        // Passa o dano para a vaca calcular
         vidaDaVaca.Receberdano(monte, atacante);
 
         if (!estaMorto && jogador != null)
@@ -58,7 +57,6 @@ public class Vidajogador2 : MonoBehaviour
             }
         }
 
-        // Última combinação a testar: scale positivo + clip "direita"
         Vector3 escala = transform.localScale;
         escala.x = Mathf.Abs(escala.x);
         transform.localScale = escala;
@@ -77,7 +75,7 @@ public class Vidajogador2 : MonoBehaviour
 
         if (TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
         {
-            rb.bodyType = RigidbodyType2D.Dynamic; // Devolve o movimento à abelha
+            rb.bodyType = RigidbodyType2D.Dynamic;
         }
     }
 

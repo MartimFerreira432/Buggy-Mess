@@ -85,12 +85,16 @@ public class ControlaJogador2 : MonoBehaviour
                 RB.linearVelocity = Vector2.zero;
                 RB.AddForce(new Vector2(Normalparede.x * 800, 900f));
                 naParede = false;
+
+                if (Sonsemcomum.Instance != null) Sonsemcomum.Instance.TocarPulo();
             }
             else if (salto > 0)
             {
                 RB.linearVelocity = new Vector2(RB.linearVelocity.x, 0);
                 RB.AddForce(new Vector2(0, 900f));
                 salto--;
+
+                if (Sonsemcomum.Instance != null) Sonsemcomum.Instance.TocarPulo();
             }
         }
 
@@ -127,26 +131,25 @@ public class ControlaJogador2 : MonoBehaviour
 
         if (salto < 2)
         {
-           
-            if (AudioManager.Instance != null) AudioManager.Instance.TocarPassos(false);
+            if (Sonsemcomum.Instance != null) Sonsemcomum.Instance.TocarPassos(false);
             PlayAnim("abelhasaltadirei");
 
             var info = animacao.GetCurrentAnimatorStateInfo(0);
             if (info.IsName("abelhasaltadirei") && info.normalizedTime >= 1f)
             {
-                animacao.speed = 0f; 
+                animacao.speed = 0f;
             }
         }
         else if (vel > 0.1f)
         {
             animacao.speed = 1f;
             PlayAnim("abelhacaminhadirei");
-            if (AudioManager.Instance != null) AudioManager.Instance.TocarPassos(true);
+            if (Sonsemcomum.Instance != null) Sonsemcomum.Instance.TocarPassos(true);
         }
         else
         {
             animacao.speed = 1f;
-            if (AudioManager.Instance != null) AudioManager.Instance.TocarPassos(false);
+            if (Sonsemcomum.Instance != null) Sonsemcomum.Instance.TocarPassos(false);
             PlayAnim("abelhaidledireita");
         }
     }
@@ -164,7 +167,6 @@ public class ControlaJogador2 : MonoBehaviour
 
             if (Normalparede.y > 0.5f)
             {
-                
                 salto = 2;
                 if (animacao != null) animacao.speed = 1f;
             }
@@ -181,6 +183,12 @@ public class ControlaJogador2 : MonoBehaviour
         {
             if (cm != null)
             {
+                // Toca o som de comer colecionável
+                if (Sonsemcomum.Instance != null)
+                {
+                    Sonsemcomum.Instance.TocarComer();
+                }
+
                 cm.collectiblecount++;
                 Destroy(collision.gameObject);
             }

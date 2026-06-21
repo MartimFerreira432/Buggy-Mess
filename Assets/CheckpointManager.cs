@@ -1,9 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// This object must persist across scene loads.
-// Put it in your MAIN scene only (not the Boss scene) — DontDestroyOnLoad
-// will carry it into the Boss scene automatically when that scene loads.
 public class CheckpointManager : MonoBehaviour
 {
     public static CheckpointManager Instance { get; private set; }
@@ -34,7 +31,6 @@ public class CheckpointManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // Called by Checkpoint.cs when a player crosses one (main scene only)
     public void SetCheckpoint(Vector3 position)
     {
         checkpointPosition = position;
@@ -43,7 +39,6 @@ public class CheckpointManager : MonoBehaviour
         Debug.Log("Checkpoint guardado em: " + position + " na cena " + checkpointSceneName);
     }
 
-    // Called by Vidajogador1/2 when the active character dies, in ANY scene
     public void Respawn()
     {
         if (!hasCheckpoint)
@@ -54,8 +49,6 @@ public class CheckpointManager : MonoBehaviour
 
         respawnPending = true;
         SceneManager.LoadScene(checkpointSceneName);
-        // Actual repositioning happens in OnSceneLoaded below, once the
-        // scene (and its Jogador/Jogador2/Jogadormanager) actually exist.
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -63,8 +56,6 @@ public class CheckpointManager : MonoBehaviour
         if (!respawnPending) return;
         respawnPending = false;
 
-        // Find this scene's player objects fresh — can't use old serialized
-        // references, since those belonged to whatever scene was loaded before.
         GameObject jogador = GameObject.Find("Jogador");
         GameObject jogador2 = GameObject.Find("Jogador2");
         Jogadormanager jogadorManager = FindAnyObjectByType<Jogadormanager>();
@@ -86,8 +77,6 @@ public class CheckpointManager : MonoBehaviour
         jogador.transform.position = checkpointPosition;
         jogador2.transform.position = checkpointPosition;
 
-        // Force player 1 (cow) active, player 2 (bee) inactive — explicitly,
-        // instead of relying on Jogadormanager's own Start()/SendMessage timing.
         var controlaJogador1 = jogador.GetComponent<ControlaJogador>();
         var controlaJogador2 = jogador2.GetComponent<ControlaJogador2>();
         if (controlaJogador1 != null) controlaJogador1.enabled = true;
@@ -101,6 +90,12 @@ public class CheckpointManager : MonoBehaviour
         PlayerPrefs.Save();
 
         SnapCamera(checkpointPosition);
+
+        // Toca o som de respawn centralizado
+        if (Sonsemcomum.Instance != null)
+        {
+            Sonsemcomum.Instance.TocarRespawn();
+        }
 
         Debug.Log("Jogador respawnado em: " + checkpointPosition + " na cena " + scene.name);
     }
