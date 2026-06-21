@@ -6,11 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/menu entrada.unity
+    guid: 6f450ae08faefc84f8d72a15dc423f6c
+  - enabled: 1
     path: Assets/Scenes/Boss.unity
     guid: 42f8f2e1b7bb91f4a95e42672ec8d9cd
   - enabled: 1
     path: Assets/Scenes/Messy bug saves.unity
     guid: 259cc137cb7eaf64587a4c140f426095
+  - enabled: 1
+    path: Assets/Scenes/fim.unity
+    guid: 70c702da68071ef429657a293fac19d5
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
