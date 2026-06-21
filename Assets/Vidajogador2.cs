@@ -32,6 +32,7 @@ public class Vidajogador2 : MonoBehaviour
     {
         if (estaMorto || vidaDaVaca == null) return;
 
+        // Passa o dano para a vaca calcular
         vidaDaVaca.Receberdano(monte, atacante);
 
         if (!estaMorto && jogador != null)
@@ -57,34 +58,27 @@ public class Vidajogador2 : MonoBehaviour
             }
         }
 
-<<<<<<< HEAD
+        // Última combinação a testar: scale positivo + clip "direita"
         Vector3 escala = transform.localScale;
         escala.x = Mathf.Abs(escala.x);
         transform.localScale = escala;
         animacao.Play("Abelhamortadireita");
-        Destroy(gameObject, 1.0f);
-=======
-        // Última combinação a testar: scale positivo + clip "direita"
-           Vector3 escala = transform.localScale;
-        escala.x = Mathf.Abs(escala.x);
-        transform.localScale = escala;
-        animacao.Play("Abelhamortadireita");
-
-        Invoke(nameof(AcionarRespawn), 1.0f);
-    }
-
-    void AcionarRespawn()
-    {
-        CheckpointManager.Instance.Respawn();
     }
 
     public void ResetVida()
     {
-        vida = vidaMaxima;
         estaMorto = false;
-        if (jogador != null) jogador.aAtacar = false;
-        if (animacao != null) animacao.speed = 1f;
->>>>>>> e50b1090ca460becc60015c6f0b88c831f11a0b6
+
+        if (jogador != null)
+            jogador.aAtacar = false;
+
+        if (animacao != null)
+            animacao.speed = 1f;
+
+        if (TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic; // Devolve o movimento à abelha
+        }
     }
 
     void PararDano()

@@ -41,7 +41,6 @@ public class Vidajogador1 : MonoBehaviour
         else if (jogador != null)
         {
             jogador.aAtacar = true;
-
             animacao.Play("Vacadanoesq");
             Invoke(nameof(PararDano), 0.4f);
         }
@@ -62,36 +61,45 @@ public class Vidajogador1 : MonoBehaviour
             }
         }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> e50b1090ca460becc60015c6f0b88c831f11a0b6
         if (jogador != null && jogador.direcao == 1)
             animacao.Play("Vacamortadireita");
         else
             animacao.Play("Vacamortaesquerda");
-<<<<<<< HEAD
-        Destroy(gameObject, 1.0f);
 
+        // Dispara o evento para a abelha morrer também
         OnMorrer?.Invoke();
-=======
 
+        // Chama o Respawn após 1 segundo (Sem destruir o objeto)
         Invoke(nameof(AcionarRespawn), 1.0f);
->>>>>>> e50b1090ca460becc60015c6f0b88c831f11a0b6
     }
 
     void AcionarRespawn()
     {
-        CheckpointManager.Instance.Respawn();
+        if (CheckpointManager.Instance != null)
+        {
+            CheckpointManager.Instance.Respawn();
+        }
     }
 
     public void ResetVida()
     {
         vida = vidaMaxima;
         estaMorto = false;
-        if (jogador != null) jogador.aAtacar = false;
-        if (animacao != null) animacao.speed = 1f;
+
+        if (jogador != null)
+            jogador.aAtacar = false;
+
+        if (animacao != null)
+            animacao.speed = 1f;
+
+        if (TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic; // Devolve o movimento físico ao jogador
+        }
+
+        barraDeVida?.AtualizarVida(vida, vidaMaxima);
     }
+
     void PararDano()
     {
         if (jogador != null && !estaMorto)
