@@ -57,11 +57,34 @@ public class Vidajogador2 : MonoBehaviour
             }
         }
 
+<<<<<<< HEAD
         Vector3 escala = transform.localScale;
         escala.x = Mathf.Abs(escala.x);
         transform.localScale = escala;
         animacao.Play("Abelhamortadireita");
         Destroy(gameObject, 1.0f);
+=======
+        // Última combinação a testar: scale positivo + clip "direita"
+           Vector3 escala = transform.localScale;
+        escala.x = Mathf.Abs(escala.x);
+        transform.localScale = escala;
+        animacao.Play("Abelhamortadireita");
+
+        Invoke(nameof(AcionarRespawn), 1.0f);
+    }
+
+    void AcionarRespawn()
+    {
+        CheckpointManager.Instance.Respawn();
+    }
+
+    public void ResetVida()
+    {
+        vida = vidaMaxima;
+        estaMorto = false;
+        if (jogador != null) jogador.aAtacar = false;
+        if (animacao != null) animacao.speed = 1f;
+>>>>>>> e50b1090ca460becc60015c6f0b88c831f11a0b6
     }
 
     void PararDano()

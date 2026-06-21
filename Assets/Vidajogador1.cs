@@ -62,15 +62,36 @@ public class Vidajogador1 : MonoBehaviour
             }
         }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e50b1090ca460becc60015c6f0b88c831f11a0b6
         if (jogador != null && jogador.direcao == 1)
             animacao.Play("Vacamortadireita");
         else
             animacao.Play("Vacamortaesquerda");
+<<<<<<< HEAD
         Destroy(gameObject, 1.0f);
 
         OnMorrer?.Invoke();
+=======
+
+        Invoke(nameof(AcionarRespawn), 1.0f);
+>>>>>>> e50b1090ca460becc60015c6f0b88c831f11a0b6
     }
 
+    void AcionarRespawn()
+    {
+        CheckpointManager.Instance.Respawn();
+    }
+
+    public void ResetVida()
+    {
+        vida = vidaMaxima;
+        estaMorto = false;
+        if (jogador != null) jogador.aAtacar = false;
+        if (animacao != null) animacao.speed = 1f;
+    }
     void PararDano()
     {
         if (jogador != null && !estaMorto)
