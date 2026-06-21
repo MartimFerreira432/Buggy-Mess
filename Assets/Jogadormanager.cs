@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class Jogadormanager : MonoBehaviour
 {
     public ControlaJogador controlaJogador1;
@@ -9,15 +10,39 @@ public class Jogadormanager : MonoBehaviour
     public GameObject Jogador;
     public GameObject Jogador2;
 
+    private bool abelhaDesbloqueada = false;
+
     void Start()
     {
         DefinirJogador1();
+    }
+
+    void OnEnable()
+    {
+        Vidaminiboss.OnBossMorreu += DesbloquearAbelha;
+    }
+
+    void OnDisable()
+    {
+        Vidaminiboss.OnBossMorreu -= DesbloquearAbelha;
+    }
+
+    void DesbloquearAbelha()
+    {
+        abelhaDesbloqueada = true;
+        Debug.Log("Abelha desbloqueada!");
     }
 
     void Update()
     {
         if (Keyboard.current.qKey.wasPressedThisFrame)
         {
+            if (!abelhaDesbloqueada)
+            {
+                Debug.Log("Abelha ainda não desbloqueada!");
+                return;
+            }
+
             Debug.Log("Q pressionado, jogadorativo atual: " + jogadorativo);
             TrocarJogador();
         }
